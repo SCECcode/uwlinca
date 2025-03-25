@@ -1,0 +1,21 @@
+#
+#nx = 63
+#ny = 135
+#nz = 21
+#
+#bottom_right_corner_lon = -112.8281
+#bottom_right_corner_lat = 33.4362
+#bottom_left_corner_lon  = -118.1781
+#bottom_left_corner_lat  = 30.2581
+#top_left_corner_lon     = -126.9210
+#top_left_corner_lat     = 39.8816
+#top_right_corner_lon    = -121.4117
+#top_right_corner_lat    = 43.0597
+
+#ucvm_query -f $UCVM_INSTALL_PATH/conf/ucvm.conf -m uwlinca -l 30.2581,-118.1781,2000
+#ucvm_query -f $UCVM_INSTALL_PATH/conf/ucvm.conf -m uwlinca -l 33.4362,-112.8281,2000
+#ucvm_query -f $UCVM_INSTALL_PATH/conf/ucvm.conf -m uwlinca -l 39.8816,-126.9210,4000
+#ucvm_query -f $UCVM_INSTALL_PATH/conf/ucvm.conf -m uwlinca -l 43.0597,-121.4117,0
+#
+ucvm_query -f $UCVM_INSTALL_PATH/conf/ucvm.conf -m uwlinca -l 32.31,-115.7709,50000
+
