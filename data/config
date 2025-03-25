@@ -1,0 +1,73 @@
+# UTM Zone ??
+utm_zone = 10
+
+# Model directory
+model_dir = uwlinca
+model_data_path  = https://g-c662a6.a78b8.36fe.data.globus.org/ucvm/models
+
+# ?? Model configuration
+version = DOI:10.1785/0120090028_Feb_2010
+
+## middle of x/y/z -> 36.5, -120
+## rotation -36 degree
+
+nx = 63
+ny = 135
+nz = 21
+
+# 63x135=8505 -- 1 layer
+# 8505 * 21 = 178605 -- total points 
+# z is from 0 to 40 in increment of 2
+
+# Corners, in LATLON 
+bottom_right_corner_lon = -112.8281
+bottom_right_corner_lat = 33.4362
+
+bottom_left_corner_lon  = -118.1781
+bottom_left_corner_lat  = 30.2581
+
+top_left_corner_lon     = -126.9210
+top_left_corner_lat     = 39.8816
+
+top_right_corner_lon    = -121.4117
+top_right_corner_lat    = 43.0597
+
+#(base) [mei@ip-172-31-31-151 ucvm2mesh]$ ./latlon2utm 10 < data_in
+#lon(-112.828100)lat(33.436200) => utm_e(1447559.671040),utm_n(3746094.350115)
+#lon(-118.178100)lat(30.258100) => utm_e(964215.773873),utm_n(3357052.526912)
+#lon(-126.921000)lat(39.881600) => utm_e(164779.614225),utm_n(4421779.438169)
+#lon(-121.411700)lat(43.059700) => utm_e(629430.451093),utm_n(4768471.076292)
+#
+#(base) [mei@ip-172-31-31-151 ucvm2mesh]$ ./latlon2utm 11 <data_in
+#lon(-112.828100)lat(33.436200) => utm_e(888004.762955),utm_n(3707241.765819)
+#lon(-118.178100)lat(30.258100) => utm_e(386745.114136),utm_n(3347779.532278)
+#lon(-126.921000)lat(39.881600) => utm_e(-348974.675624),utm_n(4461804.197445)
+#lon(-121.411700)lat(43.059700) => utm_e(140815.871758),utm_n(4776693.962715)
+#
+bottom_left_corner_e = 964215.773873
+bottom_left_corner_n = 3357052.526912
+
+top_left_corner_e    = 164779.614225
+top_left_corner_n    = 4421779.438169
+
+bottom_right_corner_e = 1447559.671040
+bottom_right_corner_n = 3746094.350115
+
+top_right_corner_e   = 629430.451093
+top_right_corner_n   = 4768471.076292
+
+# in meters
+depth = 40000
+depth_interval= 2000 
+
+## VS minimum m/s
+vs_minimum = 2000
+
+## bilinear or trilinear interpolation
+interpolation = off 
+
+# Seek method, fast-X or fast-Y
+seek_axis = fast-X
+seek_direction = top-down
+
+
