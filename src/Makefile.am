@@ -1,8 +1,9 @@
 # Autoconf/automake file
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS} -I${UCVM_SRC_PATH}/src/ucvm
-AM_LDFLAGS = ${LDFLAGS}
+AM_CFLAGS = ${CFLAGS} ${PROJ_INCLUDES}
+AM_LDFLAGS = ${LDFLAGS} ${PROJ_LDFLAGS}
+
 
 TARGETS = libuwlinca.a libuwlinca.so
 

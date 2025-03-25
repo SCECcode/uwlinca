@@ -58,7 +58,7 @@ top_right_corner_n   = 4768471.076292
 
 # in meters
 depth = 40000
-depth_interval= 2000 
+depth_interval = 2000 
 
 ## VS minimum m/s
 vs_minimum = 2000

@@ -6,8 +6,8 @@
  * @section DESCRIPTION
  *
  * Delivers the uwlinca model which base from 
- * uwlinca that was created to work with mesh created by ucvm2mesh
- *
+ * original linthurber dataset
+ * origin: lower left, fast-x, top-down 
  */
 
 #include "limits.h"
@@ -261,34 +261,36 @@ int uwlinca_query(uwlinca_point_t *points, uwlinca_properties_t *data, int numpo
 	// lon,lat,u,v			     
 	to_utm(points[i].longitude, points[i].latitude, &point_u, &point_v);
 
-if(uwlinca_debug) { fprintf(stderr,"lon %lf lat %lf\n", points[i].longitude, points[i].latitude); }
-if(uwlinca_debug) { fprintf(stderr,"point_u %lf point_v %lf\n", point_u, point_v); }
+if(uwlinca_debug) { fprintf(stderr,"   left_e %lf left_n %lf\n", 
+                      uwlinca_configuration->bottom_left_corner_e, uwlinca_configuration->bottom_left_corner_n); }
+
+if(uwlinca_debug) { fprintf(stderr,"   lon %lf lat %lf\n", points[i].longitude, points[i].latitude); }
+if(uwlinca_debug) { fprintf(stderr,"   point_u %lf point_v %lf\n", point_u, point_v); }
 
         // Point within rectangle.
         point_u -= uwlinca_configuration->bottom_left_corner_e;
         point_v -= uwlinca_configuration->bottom_left_corner_n;
+if(uwlinca_debug) { fprintf(stderr,"2  point_u %lf point_v %lf\n", point_u, point_v); }
 
         // We need to rotate that point, the number of degrees we calculated above.
         point_x = uwlinca_cos_rotation_angle * point_u - uwlinca_sin_rotation_angle * point_v;
         point_y = uwlinca_sin_rotation_angle * point_u + uwlinca_cos_rotation_angle * point_v;
+if(uwlinca_debug) { fprintf(stderr,"   point_x %lf point_y  %lf\n", point_x, point_y); }
 
         // Which point base point does that correspond to?
         load_x_coord = floor(point_x / uwlinca_total_width_m * (uwlinca_configuration->nx - 1));
 
-/* make origin-y at lower left instead of upper left (flipped) */
         load_y_coord = floor(point_y / uwlinca_total_height_m * (uwlinca_configuration->ny - 1));
-if(uwlinca_debug) { fprintf(stderr,"  before load_y_coord %d\n", load_y_coord); }
-        load_y_coord = (uwlinca_configuration->ny - load_y_coord) - 1;
-if(uwlinca_debug) { fprintf(stderr,"  after load_y_coord (%d)%d\n", uwlinca_configuration->ny,load_y_coord); }
 
         // And on the Z-axis?
-        load_z_coord = (uwlinca_configuration->depth / uwlinca_configuration->depth_interval - 1) -
+        load_z_coord = (uwlinca_configuration->depth / uwlinca_configuration->depth_interval) -
                        floor(points[i].depth / uwlinca_configuration->depth_interval);
 
-if(uwlinca_debug) { fprintf(stderr,"load_x_coord %d load_y_coord %d load_z_coord %d\n", load_x_coord,load_y_coord,load_z_coord); }
+if(uwlinca_debug) { fprintf(stderr,"   load_x_coord %d load_y_coord %d load_z_coord %d\n", load_x_coord,load_y_coord,load_z_coord); }
 
         // Are we outside the model's X and Y boundaries?
-        if (load_x_coord > uwlinca_configuration->nx - 2 || load_y_coord > uwlinca_configuration->ny - 2 || load_x_coord < 0 || load_y_coord < 0) {
+	// and also outside of z
+        if (load_x_coord > uwlinca_configuration->nx - 2 || load_y_coord > uwlinca_configuration->ny - 2 || load_x_coord < 0 || load_y_coord < 0 || load_z_coord < 1) {
             data[i].vp = -1;
             data[i].vs = -1;
             data[i].rho = -1;
@@ -309,27 +311,17 @@ if(uwlinca_debug) { fprintf(stderr,"load_x_coord %d load_y_coord %d load_z_coord
           y_percent = fmod(point_v, y_interval) / y_interval;
           z_percent = fmod(points[i].depth, uwlinca_configuration->depth_interval) / uwlinca_configuration->depth_interval;
 
-          if (load_z_coord < 1) {
-              // We're below the model boundaries. Bilinearly interpolate the bottom plane and use that value.
-              data[i].vp = -1;
-              data[i].vs = -1;
-              data[i].rho = -1;
-              data[i].qp = -1;
-              data[i].qs = -1;
-              continue;
-          } else {
-              // Read all the surrounding point properties.
-              uwlinca_read_properties(load_x_coord, load_y_coord, load_z_coord, &(surrounding_points[0]));    // Orgin.
-              uwlinca_read_properties(load_x_coord + 1, load_y_coord, load_z_coord, &(surrounding_points[1]));    // Orgin + 1x
-              uwlinca_read_properties(load_x_coord, load_y_coord + 1, load_z_coord, &(surrounding_points[2]));    // Orgin + 1y
-              uwlinca_read_properties(load_x_coord + 1, load_y_coord + 1, load_z_coord, &(surrounding_points[3]));    // Orgin + x + y, forms top plane.
-              uwlinca_read_properties(load_x_coord, load_y_coord, load_z_coord - 1, &(surrounding_points[4]));    // Bottom plane origin
-              uwlinca_read_properties(load_x_coord + 1, load_y_coord, load_z_coord - 1, &(surrounding_points[5]));    // +1x
-              uwlinca_read_properties(load_x_coord, load_y_coord + 1, load_z_coord - 1, &(surrounding_points[6]));    // +1y
-              uwlinca_read_properties(load_x_coord + 1, load_y_coord + 1, load_z_coord - 1, &(surrounding_points[7]));    // +x +y, forms bottom plane.
+          // Read all the surrounding point properties.
+          uwlinca_read_properties(load_x_coord, load_y_coord, load_z_coord, &(surrounding_points[0]));    // Orgin.
+          uwlinca_read_properties(load_x_coord + 1, load_y_coord, load_z_coord, &(surrounding_points[1]));    // Orgin + 1x
+          uwlinca_read_properties(load_x_coord, load_y_coord + 1, load_z_coord, &(surrounding_points[2]));    // Orgin + 1y
+          uwlinca_read_properties(load_x_coord + 1, load_y_coord + 1, load_z_coord, &(surrounding_points[3]));    // Orgin + x + y, forms top plane.
+          uwlinca_read_properties(load_x_coord, load_y_coord, load_z_coord - 1, &(surrounding_points[4]));    // Bottom plane origin
+          uwlinca_read_properties(load_x_coord + 1, load_y_coord, load_z_coord - 1, &(surrounding_points[5]));    // +1x
+          uwlinca_read_properties(load_x_coord, load_y_coord + 1, load_z_coord - 1, &(surrounding_points[6]));    // +1y
+          uwlinca_read_properties(load_x_coord + 1, load_y_coord + 1, load_z_coord - 1, &(surrounding_points[7]));    // +x +y, forms bottom plane.
   
-              uwlinca_trilinear_interpolation(x_percent, y_percent, z_percent, surrounding_points, &(data[i]));
-          }
+          uwlinca_trilinear_interpolation(x_percent, y_percent, z_percent, surrounding_points, &(data[i]));
           } else {
 if(uwlinca_debug) {fprintf(stderr,"direct call, no interpolation\n"); }
               uwlinca_read_properties(load_x_coord, load_y_coord, load_z_coord, &(data[i]));    // Orgin.
@@ -354,7 +346,7 @@ double _get_rho(double f) {
   return(rho);
 }
 
-**
+/**
  * Calculates the vs based off of Vp. Base on Brocher's formulae
  *
  * https://pubs.usgs.gov/of/2005/1317/of2005-1317.pdf
@@ -433,21 +425,21 @@ if(uwlinca_debug) {fprintf(stderr,"     nx(%d) ny(%d) nz(%d)\n",
     if ( strcmp(uwlinca_configuration->seek_axis, "fast-y") == 0 ||
                  strcmp(uwlinca_configuration->seek_axis, "fast-Y") == 0 ) { // fast-y,  uwlinca 
         if(strcmp(uwlinca_configuration->seek_direction, "bottom-up") == 0) { 
-                location = ((long) z * uwlinca_configuration->nx * uwlinca_configuration->ny) + (x * uwlinca_configuration->ny) + y;
+            location = ((long) z * uwlinca_configuration->nx * uwlinca_configuration->ny) + (x * uwlinca_configuration->ny) + y;
 if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-y, bottom-up)\n", location); }
             } else { // nz starts from 0 up to nz-1
-                    location = ((long)((uwlinca_configuration->nz -1) - z) * uwlinca_configuration->nx * uwlinca_configuration->ny) + (x * uwlinca_configuration->ny) + y;
-if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-y, not bottom-up)\n", location); }
+                location = ((long)((uwlinca_configuration->nz -1) - z) * uwlinca_configuration->nx * uwlinca_configuration->ny) + (x * uwlinca_configuration->ny) + y;
+if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-y, top-down)\n", location); }
         }
     } else {  // fast-X, cca data
         if ( strcmp(uwlinca_configuration->seek_axis, "fast-x") == 0 ||
                      strcmp(uwlinca_configuration->seek_axis, "fast-X") == 0 ) { // fast-x,  uwlinca 
             if(strcmp(uwlinca_configuration->seek_direction, "bottom-up") == 0) { 
-                    location = ((long)z * uwlinca_configuration->nx * uwlinca_configuration->ny) + (y * uwlinca_configuration->nx) + x;
+               location = ((long)z * uwlinca_configuration->nx * uwlinca_configuration->ny) + (y * uwlinca_configuration->nx) + x;
 if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-x, bottom-up)\n", location); }
                 } else { // bottom-up
-                        location = ((long)(uwlinca_configuration->nz - z) * uwlinca_configuration->nx * uwlinca_configuration->ny) + (y * uwlinca_configuration->nx) + x;
-if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-x, not bottom-up)\n", location); }
+                    location = ((long)((uwlinca_configuration->nz -1)- z) * uwlinca_configuration->nx * uwlinca_configuration->ny) + (y * uwlinca_configuration->nx) + x;
+if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-x, top-down)\n", location); }
             }
         }
     }
@@ -468,9 +460,9 @@ if(uwlinca_debug) {fprintf(stderr,"     FOUND : vp %f\n", temp); }
     }
 
     /* Calculate vs */
-    if (data[p].vp > 0.0) { data[p].vs=uwlinca_calculate_vs(data[p].vp); }
+    if (data->vp > 0.0) { data->vs=uwlinca_calculate_vs(data->vp); }
     /* Calculate density */
-    if (data[p].vp > 0.0) { data[[].rho=uwlinca_calculate_density(data[p].vp); }
+    if (data->vp > 0.0) { data->rho=uwlinca_calculate_density(data->vp); }
 }
 
 /**
@@ -647,7 +639,7 @@ int uwlinca_read_configuration(char *file, uwlinca_configuration_t *config) {
         config->top_right_corner_n == 0 || config->bottom_left_corner_e == 0 || config->bottom_left_corner_n == 0 ||
         config->bottom_right_corner_e == 0 || config->bottom_right_corner_n == 0 || config->depth == 0 ||
         config->depth_interval == 0) {
-        uwlinca_print_error("One uwlinca_configuration parameter not specified. Please check your uwlinca_configuration file.");
+        uwlinca_print_error("One of uwlinca_configuration parameter not specified. Please check your uwlinca_configuration file.");
         return FAIL;
     }
 
