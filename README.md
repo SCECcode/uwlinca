@@ -11,8 +11,10 @@ stations, were inverted for Vp on a 3D grid with horizontal node spacing of 10 t
 spacing of 3 to 8.
 
 https://pubs.usgs.gov/of/2005/1317/of2005-1317.pdf
-*[eqn. 1] Vs (km/s) = 0.7858 – 1.2344Vp + 0.7949Vp2 – 0.1238Vp3 + 0.0064Vp4
-*[eqn. 6] r (g/cm3) = 1.6612Vp – 0.4721Vp2 + 0.0671Vp3 – 0.0043Vp4 + 0.000106Vp5
+
+  *[eqn. 1] Vs (km/s) = 0.7858 – 1.2344Vp + 0.7949Vp2 – 0.1238Vp3 + 0.0064Vp4
+
+  *[eqn. 6] r (g/cm3) = 1.6612Vp – 0.4721Vp2 + 0.0671Vp3 – 0.0043Vp4 + 0.000106Vp5
 
 ## Installation
 
