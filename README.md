@@ -20,7 +20,11 @@ vs and density are calculated, from https://pubs.usgs.gov/of/2005/1317/of2005-13
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
-version 22.7.0 or higher.
+version 25.X.0 or higher.
+
+## NOTE
+
+A right rectangle with 36 degree rotation
 
 ## Contact the authors
 
