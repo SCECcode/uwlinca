@@ -332,19 +332,6 @@ if(uwlinca_debug) {fprintf(stderr,"direct call, no interpolation\n"); }
     return SUCCESS;
 }
 
-/* Density derived from Vp via Nafe-Drake curve, Brocher (2005) eqn 1. */
-double _get_rho(double f) {
-  double rho;
-
-  /* Convert m to km */
-  f = f / 1000.0;
-  rho = f * (1.6612 - f * (0.4721 - f * (0.0671 - f * (0.0043 - f * 0.000106))));
-  if (rho < 1.0) {
-    rho = 1.0;
-  }
-  rho = rho * 1000.0;
-  return(rho);
-}
 
 /**
  * Calculates the vs based off of Vp. Base on Brocher's formulae

@@ -11,7 +11,7 @@ AM_LDFLAGS = ${LDFLAGS}
 install:
 if WITH_UWLINCA_LARGEDATA_DIR
 	$(MKDIR_P) ${prefix}/model
- 	$(LN_S) -f $(UWLINCA_LARGEDATA_DIR) ${prefix}/model
+	$(LN_S) -f $(UWLINCA_LARGEDATA_DIR) ${prefix}/model
 	echo "USING WITH_UWLINCA_LARGEDATA_DIR in uwlinca"
 else
 	mkdir -p ${prefix}/data
