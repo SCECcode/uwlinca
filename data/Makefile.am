@@ -20,9 +20,11 @@ endif
 
 install:
 if WITH_UWLINCA_LARGEDATA_DIR
-	$(MKDIR_P) ${prefix}/model
-	$(LN_S) -f $(UWLINCA_LARGEDATA_DIR) ${prefix}/model
-	echo "USING WITH_UWLINCA_LARGEDATA_DIR in uwlinca"
+	if [ ! -d "${prefix}/data/uwlinca" ]; then \
+		$(MKDIR_P) ${prefix}/data; \
+		$(LN_S) -f $(UWLINCA_LARGEDATA_DIR) ${prefix}/data/uwlinca; \
+		echo "USING WITH_UWLINCA_LARGEDATA_DIR in uwlinca"; \
+	fi
 	cp config ${prefix}/data
 else
 	if [ ! -d "${prefix}/data/uwlinca" ]; then \
@@ -30,7 +32,7 @@ else
 		mv uwlinca ${prefix}/data; \
 		$(LN_S) -f ${prefix}/data/uwlinca .; \
 	fi
-        cp config ${prefix}/data
+	cp config ${prefix}/data
 endif
 
 clean:
