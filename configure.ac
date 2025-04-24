@@ -164,8 +164,15 @@ AC_SUBST(PROJ_LDFLAGS)
 if test x"$CVM_LARGEDATA_DIR" != x; then
    # test directory existence
    UWLINCA_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/uwlinca
-   AM_CONDITIONAL([WITH_UWLINCA_LARGEDATA_DIR], true)
-   AC_SUBST(UWLINCA_LARGEDATA_DIR)
+# In docker container building.. this is nto accessible  yet
+   if test x"$CVM_IN_DOCKER" != x; then
+     AM_CONDITIONAL([WITH_UWLINCA_LARGEDATA_DIR], true)
+     AC_SUBST(UWLINCA_LARGEDATA_DIR)
+   else
+     AC_CHECK_FILE([$UWLINCA_LARGEDATA_DIR/vp.dat], 
+                 [AM_CONDITIONAL([WITH_UWLINCA_LARGEDATA_DIR], true) AC_SUBST(UWLINCA_LARGEDATA_DIR)],
+                 [AM_CONDITIONAL(WITH_UWLINCA_LARGEDATA_DIR, false)])
+   fi
 else
    AM_CONDITIONAL(WITH_UWLINCA_LARGEDATA_DIR, false)
 fi

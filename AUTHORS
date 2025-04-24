@@ -1,15 +1,15 @@
+
 All communication regarding using UCVM should be directed to software@scec.org.
 Any scientific questions regarding this model should be directed to the researchers 
 behind this model.
 
-Brocher, T. M. (2005), Empirical relations between elastic wavespeeds and density in the Earth's crust, 
-       Bull. Seis. Soc. Am., 95 (6), 2081-2092.
+Cliff Thurber <cthurber@wisc.edu>
 
-Lin, G., C. H. Thurber, H. Zhang, E. Hauksson, P. Shearer, F. Waldhauser, T. M. Brocher, and 
-       J. Hardebeck (2010), A California statewide three-dimensional seismic velocity model from both 
-       absolute and differential Times, Bull. Seism. Soc. Am., 100, in press.
+The data and code for this model is based off of the following paper:
 
-Ludwig, W. J., J. E. Nafe, and C. L. Drake (1970), Seismic refraction, in New Concepts of Sea Floor Evolution, 
-       The Sea: Ideas and Observations on Progress in the Study of the Seas, vol. 4, edited by A. E. Maxwell, 
-       pp. 53-84, Wiley-Interscience, New York.
+Lin, G., C. H. Thurber, H. Zhang, E. Hauksson, P. Shearer, F. Waldhauser, 
+       T. M. Brocher, and J. Hardebeck (2010), 'A California statewide three-dimensional
+       seismic velocity model from both absolute and differential times'.
+       Bulletin of the Seismological Society of America, 100, 225-240. 
+       doi:10.1785/0120090028. SCEC Contribution 1360
 
