@@ -1,7 +1,6 @@
 # UMLINCA (LinThurber)
 
-The Lin Thurber et al (2010) CVM is a seismic velocity model of the California crust and uppermost mantle 
-using a regional-scale double-difference tomography algorithm. 
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 The UW statewide model is a three-dimensional (3D) tomographic model of the P wave velocity (Vp) structure 
 of northern California. It was obtained using a regional-scale double-difference tomography algorithm that 
