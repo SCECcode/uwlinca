@@ -101,7 +101,7 @@ def main():
 
     fname="./"+"MOD.finer1"
     url = path + "/" + fname
-#    download_urlfile(url,fname)
+    download_urlfile(url,fname)
 
     subprocess.check_call(["mkdir", "-p", mdir])
 

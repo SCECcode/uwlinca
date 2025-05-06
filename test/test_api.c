@@ -30,14 +30,22 @@ int main(int argc, const char* argv[]) {
 	uwlinca_properties_t ret;
 
 	// Initialize the model.
-	assert(uwlinca_init("../", "uwlinca") == 0);
+        char *envstr=getenv("UCVM_INSTALL_PATH");
+        if(envstr != NULL) {
+            if (uwlinca_init(envstr, "uwlinca") != 0) {
+                assert(1);
+            }
+            } else if (uwlinca_init("..", "uwlinca") != 0) {
+                assert(1);
+        }
 
 	printf("Loaded the model successfully.\n");
 
 	// Query a point.
-	pt.longitude = -118;
-	pt.latitude = 34;
+        pt.longitude = -121.5514;
+	pt.latitude = 37.2484;
 	pt.depth = 0;
+
 
 	uwlinca_query(&pt, &ret, 1);
 
@@ -52,7 +60,7 @@ int main(int argc, const char* argv[]) {
 
 	printf("Model closed successfully.\n");
 
-	printf("\nALL UWLINCA TESTS PASSED");
+	printf("\nALL UWLINCA TESTS PASSED\n");
 
 	return 0;
 }

@@ -1,6 +1,9 @@
 # UMLINCA (LinThurber)
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/uwlinca)
+[![uwlinca-ucvm-ci Actions Status](https://github.com/SCECcode/uwlinca/workflows/uwlinca-ucvm-ci/badge.svg)](https://github.com/SCECcode/uwlinca/actions)
+
 
 The UW statewide model is a three-dimensional (3D) tomographic model of the P wave velocity (Vp) structure 
 of northern California. It was obtained using a regional-scale double-difference tomography algorithm that 
