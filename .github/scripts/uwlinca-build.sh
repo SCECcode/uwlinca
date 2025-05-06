@@ -8,7 +8,6 @@ if [ $tmp == 'Darwin' ]; then
   brew reinstall gcc
 fi
 
-libtoolize
 aclocal
 autoconf
 automake --add-missing --force-missing
