@@ -4,7 +4,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/uwlinca)
 [![uwlinca-ucvm-ci Actions Status](https://github.com/SCECcode/uwlinca/workflows/uwlinca-ucvm-ci/badge.svg)](https://github.com/SCECcode/uwlinca/actions)
 
-
 The UW statewide model is a three-dimensional (3D) tomographic model of the P wave velocity (Vp) structure 
 of northern California. It was obtained using a regional-scale double-difference tomography algorithm that 
 incorporates a finite-difference travel time calculator and spatial smoothing constraints. Arrival times 
@@ -31,8 +30,10 @@ to the model's authors, located in the AUTHORS file.
 A right rectangle with 36 degree rotation
 
 vs and density are calculated, from https://pubs.usgs.gov/of/2005/1317/of2005-1317.pdf
+
 <pre>
   *[eqn. 1] Vs (km/s) = 0.7858 – 1.2344Vp + 0.7949Vp2 – 0.1238Vp3 + 0.0064Vp4
   *[eqn. 6] r (g/cm3) = 1.6612Vp – 0.4721Vp2 + 0.0671Vp3 – 0.0043Vp4 + 0.000106Vp5
+
 </pre>
 
