@@ -413,20 +413,20 @@ if(uwlinca_debug) {fprintf(stderr,"     nx(%d) ny(%d) nz(%d)\n",
                  strcmp(uwlinca_configuration->seek_axis, "fast-Y") == 0 ) { // fast-y,  uwlinca 
         if(strcmp(uwlinca_configuration->seek_direction, "bottom-up") == 0) { 
             location = ((long) z * uwlinca_configuration->nx * uwlinca_configuration->ny) + (x * uwlinca_configuration->ny) + y;
-if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-y, bottom-up)\n", location); }
+if(uwlinca_debug) {fprintf(stderr,"LOCATION==%ld(fast-y, bottom-up)\n", location); }
             } else { // nz starts from 0 up to nz-1
                 location = ((long)((uwlinca_configuration->nz -1) - z) * uwlinca_configuration->nx * uwlinca_configuration->ny) + (x * uwlinca_configuration->ny) + y;
-if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-y, top-down)\n", location); }
+if(uwlinca_debug) {fprintf(stderr,"LOCATION==%ld(fast-y, top-down)\n", location); }
         }
     } else {  // fast-X, cca data
         if ( strcmp(uwlinca_configuration->seek_axis, "fast-x") == 0 ||
                      strcmp(uwlinca_configuration->seek_axis, "fast-X") == 0 ) { // fast-x,  uwlinca 
             if(strcmp(uwlinca_configuration->seek_direction, "bottom-up") == 0) { 
                location = ((long)z * uwlinca_configuration->nx * uwlinca_configuration->ny) + (y * uwlinca_configuration->nx) + x;
-if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-x, bottom-up)\n", location); }
+if(uwlinca_debug) {fprintf(stderr,"LOCATION==%ld(fast-x, bottom-up)\n", location); }
                 } else { // bottom-up
                     location = ((long)((uwlinca_configuration->nz -1)- z) * uwlinca_configuration->nx * uwlinca_configuration->ny) + (y * uwlinca_configuration->nx) + x;
-if(uwlinca_debug) {fprintf(stderr,"LOCATION==%d(fast-x, top-down)\n", location); }
+if(uwlinca_debug) {fprintf(stderr,"LOCATION==%ld(fast-x, top-down)\n", location); }
             }
         }
     }
