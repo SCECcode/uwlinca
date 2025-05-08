@@ -3,8 +3,8 @@
 bin_PROGRAMS = test_uwlinca
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS} -I${UCVM_SRC_PATH}/src/ucvm -I../src
-AM_LDFLAGS = ${LDFLAGS} -L../src -luwlinca -lm
+AM_CFLAGS = ${CFLAGS} ${PROJ_INCLUDES} -I${UCVM_SRC_PATH}/src/ucvm -I../src
+AM_LDFLAGS = ${LDFLAGS} ${PROJ_LDFLAGS}  -L../src -luwlinca -lm
 
 objects = test_api.o
 TARGETS = $(bin_PROGRAMS)
@@ -17,7 +17,7 @@ all: $(bin_PROGRAMS)
 # Executables
 ############################################
 
-install:
+install: all
 	mkdir -p ${prefix}/test
 	cp test_uwlinca ${prefix}/test
 
@@ -27,3 +27,5 @@ test_uwlinca: $(objects)
 run_unit : test_uwlinca
 	./test_uwlinca
 
+clean: 
+	rm -rf test_uwlinca test_api.o
