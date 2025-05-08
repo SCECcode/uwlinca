@@ -9,7 +9,7 @@ of northern California. It was obtained using a regional-scale double-difference
 incorporates a finite-difference travel time calculator and spatial smoothing constraints. Arrival times 
 from earthquakes and travel times from controlled-source explosions, recorded at network and/or temporary
 stations, were inverted for Vp on a 3D grid with horizontal node spacing of 10 to 20 km and vertical node 
-spacing of 3 to 8.
+spacing of 3 to 8. 
 
 ## Installation
 
