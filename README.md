@@ -14,7 +14,7 @@ spacing of 3 to 8.
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
-version 25.x or higher.
+version 25.7 or higher.
 
 ## Contact the authors
 
