@@ -20,7 +20,6 @@ import struct
 import array
 import ssl
 import certifi
-from urllib.request import urlopen
 
 if sys.version_info.major >= (3) :
   from urllib.request import urlopen
