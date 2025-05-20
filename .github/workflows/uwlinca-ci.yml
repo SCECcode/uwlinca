@@ -25,11 +25,11 @@ jobs:
 #   - name: test uwlinca standalone
 #     run: ./.github/scripts/uwlinca-test-standalone.sh
 #     shell: bash
-    - name: Start SSH via Ngrok
+    - name: Start SSH debug with tmate
       if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@v3
+      uses: mxschmitt/action-tmate@v3
       with:
-           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-           NGROK_TIMEOUT: 3000
-           SSH_PASS: ${{ secrets.NGROK_SECRET }}
+        limit-access-to-actor: true
 
+    - name: sleep to keep runner alive
+      run: sleep 3600
