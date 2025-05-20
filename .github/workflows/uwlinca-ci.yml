@@ -18,7 +18,7 @@ jobs:
     - name: checkout uwlinca main
       uses: actions/checkout@v2
       with: 
-        ref: testMei 
+        ref: main 
 #   - name: build uwlinca
 #     run: ./.github/scripts/uwlinca-build.sh
 #     shell: bash
