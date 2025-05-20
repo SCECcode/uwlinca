@@ -27,7 +27,7 @@ jobs:
 #     shell: bash
     - name: Start SSH via Ngrok
       if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@main
+      uses: luchihoratiu/debug-via-ssh@v3
       with:
            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
            NGROK_TIMEOUT: 3000
