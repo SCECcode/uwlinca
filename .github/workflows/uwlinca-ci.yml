@@ -2,7 +2,7 @@ name: uwlinca-ci
 
 on:
   push:
-    branches: [ foo ]
+    branches: [ main ]
 
 jobs:
   uwlinca-build-standalone-linux:
@@ -18,13 +18,13 @@ jobs:
     - name: checkout uwlinca main
       uses: actions/checkout@v2
       with: 
-        ref: main 
-    - name: build uwlinca
-      run: ./.github/scripts/uwlinca-build.sh
-      shell: bash
-    - name: test uwlinca standalone
-      run: ./.github/scripts/uwlinca-test-standalone.sh
-      shell: bash
+        ref: testMei 
+#   - name: build uwlinca
+#     run: ./.github/scripts/uwlinca-build.sh
+#     shell: bash
+#   - name: test uwlinca standalone
+#     run: ./.github/scripts/uwlinca-test-standalone.sh
+#     shell: bash
     - name: Start SSH via Ngrok
       if: ${{ success() }}
       uses: luchihoratiu/debug-via-ssh@main

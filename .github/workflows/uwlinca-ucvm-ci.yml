@@ -2,7 +2,7 @@ name: uwlinca-ucvm-ci
 
 on:
   push:
-    branches: [ main ]
+    branches: [ foo ]
 
 jobs:
   uwlinca-build-ucvm-linux:
@@ -28,13 +28,13 @@ jobs:
          initiating-repo: 'uwlinca'
          target-model: 'uwlinca'
          target-branch: 'testMei'
-    - name: Start SSH via Ngrok
-      if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-          NGROK_TIMEOUT: 3000
-          SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#   - name: Start SSH via Ngrok
+#     if: ${{ success() }}
+#     uses: luchihoratiu/debug-via-ssh@main
+#     with:
+#         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#         NGROK_TIMEOUT: 3000
+#         SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
