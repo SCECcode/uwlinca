@@ -5,6 +5,7 @@ tmp=`uname -s`
 if [ $tmp == 'Darwin' ]; then
 ##for macOS, make sure have automake/aclocal
   brew install automake
+  brew install libtool
   brew reinstall gcc
 fi
 
