@@ -2,7 +2,7 @@ name: uwlinca-ci
 
 on:
   push:
-    branches: [ foo ]
+    branches: [ foofoo ]
 
 jobs:
   uwlinca-build-standalone-linux:
