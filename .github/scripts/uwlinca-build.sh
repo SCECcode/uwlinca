@@ -5,8 +5,9 @@ tmp=`uname -s`
 if [ $tmp == 'Darwin' ]; then
 ##for macOS, make sure have automake/aclocal/libtoolize
   brew install automake
-  brew install libtool
   brew reinstall gcc
+  brew install libtool
+  export PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
 fi
 
 libtoolize
