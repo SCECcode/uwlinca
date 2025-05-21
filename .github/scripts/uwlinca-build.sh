@@ -3,7 +3,7 @@
 tmp=`uname -s`
 
 if [ $tmp == 'Darwin' ]; then
-##for macOS, make sure have automake/aclocal
+##for macOS, make sure have automake/aclocal/libtoolize
   brew install automake
   brew install libtool
   brew reinstall gcc
