@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [[ -z "${UCVM_INSTALL_PATH}" ]]; then
-  if [[ -f "${UCVM_INSTALL_PATH}/model/uwlinca/lib" ]]; then
-    env DYLD_LIBRARY_PATH=${UCVM_INSTALL_PATH}/model/uwlinca/lib ./test_uwlinca
+if [[ ! -z "${UCVM_INSTALL_PATH}" ]]; then
+  if [[ -d "${UCVM_INSTALL_PATH}/model/uwlinca/lib" ]]; then
+    env DYLD_LIBRARY_PATH=${UCVM_INSTALL_PATH}/model/uwlinca/lib:${DYLD_LIBRARY_PATH} ./test_uwlinca
     exit
   fi
 fi
-env DYLD_LIBRARY_PATH=../src ./test_uwlinca
+env DYLD_LIBRARY_PATH=../src:${DYLD_LIBRARY_PATH} ./test_uwlinca
