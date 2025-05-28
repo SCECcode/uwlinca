@@ -2,7 +2,7 @@ name: uwlinca-ucvm-ci
 
 on:
   push:
-    branches: [ main ]
+    branches: [ foofoo ]
 
 jobs:
   uwlinca-build-ucvm-mac:
