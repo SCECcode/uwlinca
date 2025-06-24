@@ -1,5 +1,7 @@
 # UMLINCA (LinThurber)
 
+<a href="https://github.com/sceccode/uwlinca.git"><img src="https://github.com/sceccode/uwlinca/wiki/images/uwlinca_logo.png"></a>
+
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/uwlinca)
 [![uwlinca-ucvm-ci Actions Status](https://github.com/SCECcode/uwlinca/workflows/uwlinca-ucvm-ci/badge.svg)](https://github.com/SCECcode/uwlinca/actions)
