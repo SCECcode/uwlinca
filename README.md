@@ -13,6 +13,8 @@ from earthquakes and travel times from controlled-source explosions, recorded at
 stations, were inverted for Vp on a 3D grid with horizontal node spacing of 10 to 20 km and vertical node 
 spacing of 3 to 8. 
 
+Lin, G., C. H. Thurber, H. Zhang, E. Hauksson, P. Shearer, F. Waldhauser, T. M. Brocher, and J. Hardebeck (2010), A California statewide three-dimensional seismic velocity model from both absolute and differential times. Bulletin of the Seismological Society of America, 100, 225-240. doi:10.1785/0120090028. SCEC Contribution 1360
+
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
