@@ -1,2 +1,5 @@
+2025-07-31 Mei-Hui Su <mei@usc.edu>
+        * v1.0 release with UCVM 25.7
+
 2025-02-15 Mei-Hui Su <mei@usc.edu>
 	* Reincorporate the LinThurber CVM back into UCVM, renamed to UWLINCA
